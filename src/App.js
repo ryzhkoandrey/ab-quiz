@@ -31,7 +31,9 @@ function Result() {
    return (
       <div className="result">
          <img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" />
-         <h2>Вы отгадали 3 ответа из 10</h2>
+
+         <h2>Вы отгадали 3 ответа из {questions.length}</h2>
+
          <button>Попробовать снова</button>
       </div>
    );
@@ -73,8 +75,11 @@ function App() {
 
    return (
       <div className="App">
-         <Game step={step} question={question} onClickVariant={onClickVariant} />
-         {/* <Result /> */}
+         {step !== questions.length ? (
+            <Game step={step} question={question} onClickVariant={onClickVariant} />
+         ) : (
+            <Result />
+         )}
       </div>
    );
 }
