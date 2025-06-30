@@ -37,7 +37,7 @@ function Result() {
    );
 }
 
-function Game({ question }) {
+function Game({ question, onClickVariant }) {
    return (
       <>
          <div className="progress">
@@ -47,9 +47,11 @@ function Game({ question }) {
          <h1>{question.title}</h1>
 
          <ul>
-            <li>Это функция для хранения данных компонента</li>
-            <li>Это глобальный стейт</li>
-            <li>Это когда на ты никому не нужен</li>
+            {question.variants.map((text, index) => (
+               <li onClick={() => onClickVariant(index)} key={index}>
+                  {text}
+               </li>
+            ))}
          </ul>
       </>
    );
@@ -59,9 +61,13 @@ function App() {
    const [step, setStep] = React.useState(0);
    const question = questions[step];
 
+   const onClickVariant = (index) => {
+      console.log(step, index);
+   };
+
    return (
       <div className="App">
-         <Game question={question} />
+         <Game question={question} onClickVariant={onClickVariant} />
          {/* <Result /> */}
       </div>
    );
